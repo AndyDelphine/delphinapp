@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D&A MEDTRACK - Register</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #23272F;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: url('/static/injection pic.jpg') center center / cover no-repeat;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(35, 39, 47, 0.18);
+      z-index: -1;
+    }
+    .nav {
+      width: 100%;
+      padding: 24px 7vw 16px 7vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(2px);
+      position: relative;
+      z-index: 2;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      color: #23272F;
+      background: rgba(255,255,255,0.5);
+      padding: 6px 22px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(35,39,47,0.06);
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-links a {
+      color: #23272F;
+      background: #fff;
+      border-radius: 22px;
+      padding: 8px 24px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 2px 12px rgba(35,39,47,0.08);
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-links a:hover {
+      background: #23272F;
+      color: #fff;
+    }
+    .container {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .register-box {
+      background: rgba(255,255,255,0.95);
+      padding: 38px 36px 32px 36px;
+      border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(35,39,47,0.14);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+      animation: slideInFade 0.7s cubic-bezier(.54,.17,.36,1.23);
+    }
+    @keyframes slideInFade {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .register-box h2 {
+      color: #23272F;
+      margin-bottom: 16px;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .register-box p {
+      color: #2B3545;
+      margin-bottom: 28px;
+      font-size: 1.06rem;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: #23272F;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 11px 15px;
+      border-radius: 7px;
+      border: 1.5px solid #c1c7d0;
+      font-size: 1.09rem;
+      background: #f8f9fc;
+      color: #23272F;
+      outline: none;
+      transition: border 0.18s;
+    }
+    .form-group input:focus {
+      border: 1.5px solid #2B3545;
+      background: #fff;
+    }
+    .register-btn {
+      width: 100%;
+      display: block;
+      background: linear-gradient(90deg, #23272F 70%, #2B3545 100%);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 0;
+      font-size: 1.12rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 3px 16px rgba(35,39,47,0.11);
+      transition: background 0.16s, transform 0.13s;
+    }
+    .register-btn:hover {
+      background: linear-gradient(90deg, #2B3545 80%, #23272F 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .bottom-link {
+      margin-top: 24px;
+      color: #23272F;
+      font-size: 1.01rem;
+    }
+    .bottom-link a {
+      color: #2B3545;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 6px;
+      transition: color 0.18s;
+    }
+    .bottom-link a:hover {
+      color: #23272F;
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .nav { padding: 14px 4vw 8px 4vw; }
+      .logo { font-size: 1.18rem; padding: 4px 12px; }
+      .container { padding: 24px 0; }
+      .register-box { padding: 24px 10px 18px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="logo">D&amp;A BLOODBANK</div>
+  </nav>
+  <div class="container">
+    <form class="register-box" action="{{url_for('register')}}" method="POST">
+      <h2>Register</h2>
+      <p>Create your <b>D&amp;A BLOODBANK</b> account</p>
+      <div class="form-group">
+        <label for="fullname">Username</label>
+        <input type="text" id="username" name="username" placeholder="Create your username" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required autocomplete="new-password">
+      </div>
+      <button type="submit" class="register-btn">Register</button>
+      <div class="bottom-link">
+        Already have an account?
+        <a href="{{ url_for('login') }}">Login here</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

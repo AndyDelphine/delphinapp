@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D&A MEDTRACK - Find Blood Donors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: url('/static/doctorspic.jpg') center center / cover no-repeat;
+      color: #23272F;
+    }
+    .nav {
+      background: #23272F;
+      color: #fff;
+      padding: 20px 6vw 16px 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(35,39,47,0.09);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+    .nav-links a {
+      color: #fff;
+      background: #2B3545;
+      border-radius: 18px;
+      padding: 7px 18px;
+      margin-left: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.18s;
+    }
+    .nav-links a:hover {
+      background: #fff;
+      color: #23272F;
+    }
+    .container {
+      max-width: 900px;
+      margin: 36px auto 0 auto;
+      padding: 0 16px 32px 16px;
+    }
+    .current-user-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 32px rgba(35,39,47,0.12);
+      padding: 28px 26px 22px 26px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: fadeIn 1s;
+    }
+    .current-user-blood {
+      background: linear-gradient(90deg, #D7263D 60%, #8B1E3F 100%);
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: bold;
+      padding: 5px 20px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      letter-spacing: 1.2px;
+      box-shadow: 0 2px 8px rgba(215,38,61,0.14);
+    }
+    .user-details {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 1.03rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    .user-details li {
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #f2f2f2;
+      display: flex;
+      justify-content: space-between;
+    }
+    .user-details span {
+      color: #8B1E3F;
+      font-weight: 500;
+    }
+    .search-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(35,39,47,0.09);
+      padding: 24px 20px 20px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      animation: fadeIn 1.2s;
+    }
+    .search-section h3 {
+      margin-bottom: 13px;
+      color: #23272F;
+      font-size: 1.18rem;
+    }
+    .search-form {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .search-form select, .search-form button {
+      padding: 9px 16px;
+      border-radius: 7px;
+      border: 1.5px solid #c1c7d0;
+      font-size: 1rem;
+      outline: none;
+      background: #f8f9fc;
+      color: #23272F;
+      margin-right: 8px;
+    }
+    .search-form button {
+      background: linear-gradient(90deg, #23272F 75%, #2B3545 100%);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      box-shadow: 0 2px 12px rgba(35,39,47,0.10);
+      transition: background 0.16s, transform 0.14s;
+      cursor: pointer;
+    }
+    .search-form button:hover {
+      background: linear-gradient(90deg, #2B3545 85%, #23272F 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .compatibility-tip {
+      font-size: 0.97rem;
+      color: #5e5a5a;
+      background: #ffeaea;
+      border-left: 4px solid #D7263D;
+      border-radius: 0 8px 8px 0;
+      padding: 9px 16px;
+      margin-top: 7px;
+      margin-bottom: 6px;
+    }
+    .results-section {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      animation: fadeIn 1.5s;
+    }
+    .donor-card {
+      background: #fff;
+      border-radius: 9px;
+      box-shadow: 0 2px 12px rgba(35,39,47,0.08);
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      border-left: 5px solid #8B1E3F;
+      transition: box-shadow 0.18s;
+    }
+    .donor-card .donor-blood {
+      background: #8B1E3F;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.08rem;
+      border-radius: 7px;
+      padding: 5px 14px;
+      margin-right: 14px;
+      letter-spacing: 1px;
+      min-width: 58px;
+      text-align: center;
+    }
+    .donor-card .donor-info {
+      flex: 1;
+    }
+    .donor-card .donor-name {
+      font-size: 1.09rem;
+      font-weight: 600;
+      color: #23272F;
+      margin-bottom: 2px;
+    }
+    .donor-card .donor-details {
+      font-size: 0.98rem;
+      color: #5e5a5a;
+    }
+    .donor-card .contact-btn {
+      background: #D7263D;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 17px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.16s;
+      margin-left: 18px;
+    }
+    .donor-card .contact-btn:hover {
+      background: #8B1E3F;
+    }
+    @media (max-width: 700px) {
+      .container { max-width: 97vw; }
+      .current-user-card, .search-section { padding: 14px 8px; }
+      .donor-card { flex-direction: column; align-items: flex-start; }
+      .donor-card .donor-blood { margin-bottom: 10px; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="logo">D&amp;A BLOODBANK</div>
+    <div class="nav-links">
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    <!-- Current user info card -->
+    <div class="current-user-card">
+      <div class="current-user-blood">A+ (You)</div>
+      <ul class="user-details">
+        <li><span>Name:</span> {{ current_user.fullname }}</li>
+        <li><span>Gender:</span> {{ current_user.gender }}</li>
+        <li><span>Date of Birth:</span> {{ current_user.dob }}</li>
+        <li><span>Phone:</span> {{ current_user.phonenumber }}</li>
+        <li><span>Email:</span> {{ current_user.email }}</li>
+        <li><span>Genotype:</span> {{ current_user.genotype }}</li>
+        <li><span>Weight:</span> {{ current_user.weight }}</li>
+        <li><span>Address:</span>{{ current_user.address }}</li>
+        <li><span>On Medications:</span> {{ current_user.medications }}</li>
+        <li><span>Other Notes:</span> {{ current_user.notes }}</li>
+      </ul>
+    </div>
+
+    <!-- Search section -->
+    <div class="search-section">
+      <h3>Find Compatible Blood Donors</h3>
+      <form class="search-form" action="{{ url_for('donorsearch', user_id=current_user.id) }}" method="GET">
+        <label for="bloodgroup" style="font-weight:600;">Search by Blood Group:</label>
+        <select id="bloodgroup" name="bloodgroup" required>
+          <option value="">-- Select --</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+        <button type="submit">Search</button>
+      </form>
+      <div class="compatibility-tip">
+        <b>Tip:</b> People with <b>O-</b> blood group are universal donors, while <b>AB+</b> are universal recipients.
+      </div>
+    </div>
+
+    <!-- Results section (example, in real app you'll populate with server data) -->
+    <div class="results-section">
+        {% if donors %}
+          {% for donor in donors %}
+            <div class="donor-card">
+              <div class="donor-blood">{{ donor.bloodgroup }}</div>
+              <div class="donor-info">
+                <div class="donor-name">{{ donor.fullname }}</div>
+                <div class="donor-details">
+                  Genotype: {{ donor.genotype }} &nbsp;|&nbsp;
+                  Weight: {{ donor.weight }}kg &nbsp;|&nbsp;
+                  Location: {{ donor.address }}
+                </div>
+              </div>
+              <button class="contact-btn" onclick="window.location.href='tel:{{ donor.phonenumber }}'">Contact</button>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="donor-card">
+            <div class="donor-info">
+              <div class="donor-name">No matching donors found.</div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      
+</body>
+</html>

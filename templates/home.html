@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D&A MEDTRACK - Donate & Receive Life</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #212529;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: url('/static/doctorpic.jpg') center center / cover no-repeat;
+      z-index: -2;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(35, 39, 47, 0.12); /* Use charcoal as overlay */
+      z-index: -1;
+    }
+    nav {
+      width: 100%;
+      padding: 28px 6vw 18px 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(3px);
+      position: relative;
+      z-index: 2;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      color: #23272F; /* Charcoal */
+      text-shadow: 0 2px 6px rgba(255,255,255,0.19), 0 1.5px 12px rgba(35,39,47,0.08);
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+    }
+    .nav-links a {
+      background: #fff;
+      color: #23272F; /* Charcoal */
+      border: none;
+      border-radius: 26px;
+      padding: 10px 28px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 16px rgba(35,39,47,0.10);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .nav-links a:hover {
+      background: #23272F;
+      color: #fff;
+      box-shadow: 0 6px 32px rgba(35,39,47,0.18);
+    }
+    .hero-section {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 7vw 4vw 0 4vw;
+      z-index: 1;
+      position: relative;
+    }
+    .hero-section h1 {
+      font-size: 2.8rem;
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 24px rgba(35,39,47,0.22);
+    }
+    .hero-section h1 span {
+      color: #23272F; /* Charcoal */
+      background: rgba(255,255,255,0.3);
+      padding: 0 10px;
+      border-radius: 10px;
+    }
+    .hero-section p {
+      font-size: 1.28rem;
+      color: #f5f5f5;
+      max-width: 600px;
+      margin: 0 auto 32px auto;
+      line-height: 1.7;
+      background: rgba(33, 37, 41, 0.26);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 12px rgba(35,39,47,0.04);
+      backdrop-filter: blur(2px);
+    }
+    .cta-btn {
+      background: linear-gradient(90deg, #23272F 70%, #2B3545 100%);
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 14px 35px;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 6px 28px rgba(35,39,47,0.18);
+      transition: background 0.18s, transform 0.16s;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 8px;
+    }
+    .cta-btn:hover {
+      background: linear-gradient(90deg, #2B3545 70%, #23272F 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    @media (max-width: 900px) {
+      .hero-section h1 { font-size: 2.1rem; }
+      nav { padding: 18px 3vw 12px 3vw; }
+    }
+    @media (max-width: 600px) {
+      .hero-section { padding-top: 18vw; }
+      .hero-section h1 { font-size: 1.32rem; }
+      .hero-section p { font-size: 1rem; }
+      .nav-links a { padding: 8px 16px; font-size: 0.97rem; }
+      nav { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">D&A BLOODBANK</div>
+    <div class="nav-links">
+      <a href="{{url_for('login')}}">Login</a>
+      <a href="{{url_for('register')}}">Register</a>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <h1>
+      <span>Donate Blood, Save Lives</span>
+    </h1>
+    <p>
+      Welcome to <b>D&A BLOODBANK</b> — a platform connecting heroes like you with those in need.<br>
+      Register as a donor or recipient, and search for compatible blood donors in your area.<br>
+      Fill out your health profile, join the community, and help save lives today!
+    </p>
+    <a href="/register" class="cta-btn">Get Started</a>
+  </section>
+</body>
+</html>
