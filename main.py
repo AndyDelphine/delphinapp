@@ -4,8 +4,10 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from sqlalchemy import Select
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from datetime import datetime
+
 
 
 app = Flask(__name__)
@@ -14,7 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app) 
 app.secret_key = "your_secret_key"
-
+migrate = Migrate(app, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
